@@ -32,14 +32,26 @@ namespace Academy
 			Attendance = attendance;
 			Console.WriteLine($"SConstructor\t:{this.GetHashCode()}");
 		}
+		public Student(Student other) : base(other)	//здесь нефвно происходит Upcase - преобразование объекта доернего класса в объект базового класса.
+		{
+			this.Speciality = other.Speciality;
+			this.Group = other.Group;
+			this.Rating = other.Rating;
+			this.Attendance = other.Attendance;
+			Console.WriteLine($"SCopyConstructor:{this.GetHashCode()}");
+		}
 		~Student()
 		{
 			Console.WriteLine($"SDestructor\t:{this.GetHashCode()}");
 		}
-		public void Info()
+		public override void Info()
 		{
 			base.Info();
 			Console.WriteLine($"{Speciality} {Group} {Rating} {Attendance}");
+		}
+		public override string ToString()
+		{
+			return base.ToString() + $" {Speciality}, {Group}, {Rating}, {Attendance}";
 		}
 	}
 }
