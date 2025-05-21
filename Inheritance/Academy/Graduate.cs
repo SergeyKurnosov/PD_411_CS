@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Academy
 {
-	class Graduate:Student
+	class Graduate : Student
 	{
 		public string Subject { get; set; }
 		public Graduate
@@ -36,7 +36,11 @@ namespace Academy
 
 		public override string ToString()
 		{
-			return base.ToString() + $", {Subject}";
+			return base.ToString() + Subject;
+		}
+		public override string ToFileString()
+		{
+			return base.ToFileString() + $",{Subject}";
 		}
 	}
 }

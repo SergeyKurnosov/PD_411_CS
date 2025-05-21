@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;    //Input/Output
+using System.Diagnostics;	//Для запуска других программ при помощи класса 'Process';
 
 namespace Academy
 {
@@ -58,9 +60,24 @@ namespace Academy
 			for (int i = 0; i < group.Length; i++)
 			{
 				Console.WriteLine(group[i]);
-				group[i].Info();
-				Console.WriteLine(delimiter);
+				//group[i].Info();
+				//Console.WriteLine(delimiter);
 			}
+			///////////////////////////////////////////////
+
+			StreamWriter sw = new StreamWriter("Group.txt");    //Создаем и открываем поток
+
+			for (int i = 0; i < group.Length; i++)
+			{
+				sw.WriteLine(group[i].ToFileString());
+			}
+
+			sw.Close(); //Потоки обязательно нужно закрывать!!!
+
+			Process.Start("notepad.exe", "Group.txt");
+
+			//CSV - Comma Separated Values (Значения раздеренные запятой);
+
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Academy
 {
-	class Student:Human
+	class Student : Human
 	{
 		public string Speciality { get; set; }
 		public string Group { get; set; }
@@ -16,7 +16,7 @@ namespace Academy
 			(
 			string last_name, string first_name, int age,
 			string speciality, string group, double rating, double attendance
-			):base(last_name,first_name,age)
+			) : base(last_name, first_name, age)
 		{
 			Speciality = speciality;
 			Group = group;
@@ -24,7 +24,7 @@ namespace Academy
 			Attendance = attendance;
 			Console.WriteLine($"SConstructor\t:{this.GetHashCode()}");
 		}
-		public Student(Human human, string speciality, string group, double rating, double attendance):base(human)
+		public Student(Human human, string speciality, string group, double rating, double attendance) : base(human)
 		{
 			Speciality = speciality;
 			Group = group;
@@ -32,7 +32,7 @@ namespace Academy
 			Attendance = attendance;
 			Console.WriteLine($"SConstructor\t:{this.GetHashCode()}");
 		}
-		public Student(Student other) : base(other)	//здесь нефвно происходит Upcase - преобразование объекта доернего класса в объект базового класса.
+		public Student(Student other) : base(other) //здесь нефвно происходит Upcase - преобразование объекта доернего класса в объект базового класса.
 		{
 			this.Speciality = other.Speciality;
 			this.Group = other.Group;
@@ -51,7 +51,12 @@ namespace Academy
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $" {Speciality}, {Group}, {Rating}, {Attendance}";
+			return base.ToString() +
+				$"{Speciality.PadRight(25)}{Group.PadRight(8)}{Rating.ToString().PadRight(8)}{Attendance.ToString().PadRight(8)}";
+		}
+		public override string ToFileString()
+		{
+			return base.ToFileString()+$",{Speciality},{Group},{Rating},{Attendance}";
 		}
 	}
 }
