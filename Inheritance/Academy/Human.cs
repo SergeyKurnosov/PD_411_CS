@@ -40,10 +40,15 @@ namespace Academy
 			Console.WriteLine($"{LastName} {FirstName} {Age}");
 		}
 
-
 		public override string ToString()
 		{
-			return base.ToString() + $":\t{LastName} {FirstName} {Age}";
+			return (base.ToString()+":").Split('.').Last().PadRight(12)
+				+ $"{LastName.PadRight(15)}{FirstName.PadRight(15)}{Age.ToString().PadRight(5)}";
+		}
+
+		public virtual string ToFileString()
+		{
+			return $"{GetType().ToString().Split('.').Last()}:{LastName},{FirstName},{Age}";
 		}
 	}
 }

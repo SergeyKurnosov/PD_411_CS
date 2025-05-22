@@ -6,27 +6,26 @@ using System.Threading.Tasks;
 
 namespace Academy
 {
-	internal class Graduate : Student
+	class Graduate : Student
 	{
 		public string Subject { get; set; }
-
-		public Graduate(
-						string last_name, string first_name, int age,
+		public Graduate
+			(
+			string last_name, string first_name, int age,
 			string speciality, string group, double rating, double attendance,
 			string subject
-			):base(last_name , first_name , age, speciality, group, rating, attendance)
+			) : base(last_name, first_name, age, speciality, group, rating, attendance)
+		{
+			Subject = subject;
+			Console.WriteLine($"GConstructor:{this.GetHashCode()}");
+		}
+		public Graduate(Student student, string subject) : base(student)
 		{
 			Subject = subject;
 			Console.WriteLine($"GConstructor:{this.GetHashCode()}");
 		}
 
-		public Graduate(Student student , string subject):base(student)
-		{
-			Subject=subject;
-			Console.WriteLine($"GConstructor:{this.GetHashCode()}");
-		}
-
-		~Graduate() 
+		~Graduate()
 		{
 			Console.WriteLine($"GDestructor:{this.GetHashCode()}");
 		}
@@ -36,9 +35,14 @@ namespace Academy
 			base.Info();
 			Console.WriteLine($"\t{Subject}");
 		}
+
 		public override string ToString()
 		{
-			return base.ToString() + $", {Subject}";
+			return base.ToString() + Subject;
+		}
+		public override string ToFileString()
+		{
+			return base.ToFileString() + $",{Subject}";
 		}
 
 	}

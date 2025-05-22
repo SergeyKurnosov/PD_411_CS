@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;    //Input/Output
+using System.Diagnostics;	//Для запуска других программ при помощи класса 'Process';
 
 namespace Academy
 {
@@ -34,35 +36,48 @@ namespace Academy
 			s_tommy.Info();
 			Console.WriteLine(delimiter);
 
-
 			Graduate g_tommy = new Graduate(s_tommy, "How to make money");
 			g_tommy.Info();
 			Console.WriteLine(delimiter);
 
 			Graduate graduate = new Graduate("Schreder", "Hank", 40, "Criminalistic", "OBN", 70, 80, "How to catch Heizenberg");
 			graduate.Info();
-			Console.WriteLine(delimiter);
+			Console.WriteLine(delimiter); 
 #endif
-			//Generalization(обобщение)
+
+			//Generalization (Обобщение):
 			Human[] group = new Human[]
-			{
-				//Upcast - преобразование обьекта дочернего класса в обьект базового класса
-			new Student("Pinkman", "Jessie", 22, "Chemistry", "WW_220", 95, 96),
-			new Teacher("White", "Walter", 50, "Chemistry", 25),
-			new Graduate("Vercetty", "Tommy",30 ,",Theft", "Vice", 95, 98 , "How to make money"),
-			new Graduate("Schreder", "Hank", 40, "Criminalistic", "OBN", 70, 80, "How to catch Heizenberg"),
-			new Teacher("Diaz", "Ricardo", 50, "Weapons distr", 20)
+				{
+					//Upcast - преобразование объекта дочернего класса в объект базового класса
+					new Student("Pinkman", "Jessie", 22, "Chemistry", "WW_220", 95, 96),
+					new Teacher("White", "Walter", 50, "Chemistry", 25),
+					new Graduate("Vercetty", "Tommy", 30, "Theft", "Vice", 95, 98, "How to make money"),
+					new Graduate("Schreder", "Hank", 40, "Criminalistic", "OBN", 70, 80, "How to catch Heizenberg"),
+					new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
+				};
 
-		};
-
-			//Specialization (Уточнение): 
+			//Specialization (Уточнение):
 			for (int i = 0; i < group.Length; i++)
 			{
 				Console.WriteLine(group[i]);
-				group[i].Info();
-				Console.WriteLine(delimiter);
+				//group[i].Info();
+				//Console.WriteLine(delimiter);
 			}
-			
+			///////////////////////////////////////////////
+
+			StreamWriter sw = new StreamWriter("Group.txt");    //Создаем и открываем поток
+
+			for (int i = 0; i < group.Length; i++)
+			{
+				sw.WriteLine(group[i].ToFileString());
+			}
+
+			sw.Close(); //Потоки обязательно нужно закрывать!!!
+
+			Process.Start("notepad.exe", "Group.txt");
+
+			//CSV - Comma Separated Values (Значения раздеренные запятой);
+
 		}
 	}
 }
