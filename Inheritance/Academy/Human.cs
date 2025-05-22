@@ -23,6 +23,7 @@ namespace Academy
 			//BigCamel
 			//smallCamelCaseStyle
 		}
+
 		public Human(Human other)
 		{
 			this.LastName = other.LastName;
