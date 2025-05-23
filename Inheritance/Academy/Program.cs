@@ -69,6 +69,7 @@ namespace Academy
 			Print(group);
 
 			Console.WriteLine("DONE");
+			//abstract
 
 		}
 		public static void Print(Human[] group)
