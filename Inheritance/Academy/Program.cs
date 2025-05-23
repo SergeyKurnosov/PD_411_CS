@@ -1,17 +1,19 @@
 ﻿//#define INHERITANCE
+//#define SAVE_TO_FILE
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;    //Input/Output
-using System.Diagnostics;	//Для запуска других программ при помощи класса 'Process';
+using System.Diagnostics;   //Для запуска других программ при помощи класса 'Process';
 
 namespace Academy
 {
 	class Program
 	{
-		static readonly string  delimiter = "\n----------------------------------------------\n";
+		static readonly string delimiter = "\n----------------------------------------------\n";
 		static void Main(string[] args)
 		{
 
@@ -45,6 +47,7 @@ namespace Academy
 			Console.WriteLine(delimiter); 
 #endif
 
+#if SAVE_TO_FILE
 			//Generalization (Обобщение):
 			Human[] group = new Human[]
 				{
@@ -56,6 +59,20 @@ namespace Academy
 					new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
 				};
 
+			Print(group);
+			Save(group, "group.csv"); 
+#endif
+			///////////////////////////////////////////////
+			///
+
+			Human[] group = Load("base.csv");
+			Print(group);
+
+			Console.WriteLine("DONE");
+
+		}
+		public static void Print(Human[] group)
+		{
 			//Specialization (Уточнение):
 			for (int i = 0; i < group.Length; i++)
 			{
@@ -63,9 +80,11 @@ namespace Academy
 				//group[i].Info();
 				//Console.WriteLine(delimiter);
 			}
-			///////////////////////////////////////////////
+		}
+		public static void Save(Human[] group, string filename)
+		{
 
-			StreamWriter sw = new StreamWriter("Group.txt");    //Создаем и открываем поток
+			StreamWriter sw = new StreamWriter(filename);    //Создаем и открываем поток
 
 			for (int i = 0; i < group.Length; i++)
 			{
@@ -74,10 +93,48 @@ namespace Academy
 
 			sw.Close(); //Потоки обязательно нужно закрывать!!!
 
-			Process.Start("notepad.exe", "Group.txt");
+			Process.Start("notepad.exe", filename);
 
 			//CSV - Comma Separated Values (Значения раздеренные запятой);
 
+		}
+		public static Human[] Load(string filename)
+		{
+			List<Human> group = new List<Human>();
+
+			try
+			{
+				StreamReader sr = new StreamReader(filename);
+
+				while (!sr.EndOfStream)
+				{
+					string buffer = sr.ReadLine();
+					//Console.WriteLine(buffer);
+					Human human = HumanFactory(buffer.Split(':').First());
+					human.Init(buffer.Split(':').Last().Split(','));
+					group.Add(human);
+				}
+
+				sr.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+
+			return group.ToArray();
+		}
+		public static Human HumanFactory(string type)
+		{
+			Human human = null;
+			switch (type)
+			{
+				case "Human":		human = new Human("", "", 0); break;
+				case "Student":		human = new Student("", "", 0, "", "", 0, 0);break;
+				case "Graduate":	human = new Graduate("", "", 0, "", "", 0, 0, "n/a");break;
+				case "Teacher":		human = new Teacher("", "", 0, "", 0);break;
+			}
+			return human;
 		}
 	}
 }
