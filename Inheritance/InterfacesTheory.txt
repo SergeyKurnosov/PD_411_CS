@@ -1,0 +1,11 @@
+﻿I... - Interface
+...Able - Способен
+
+IMovable (Move) - Дает возможность объектам двигаться
+IFlyable (Fly, TopUp, Landing) - Дает возможность объектам летать
+ICompareable(Compare) - Дает возможность сравнивать объекты
+ISortable(Sort) - 
+
+ИНТЕРФЕЙСЫ РЕАЛИЗУЮТ
+
+IDiagonalAble => IHaveDiagonal

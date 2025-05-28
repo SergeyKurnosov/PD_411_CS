@@ -10,9 +10,10 @@
   <Class Name="Geometry.Rectangle" Collapsed="true">
     <Position X="1.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAgQAQAAAAEAAAAAAAAEAAAAAEEAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAgQAQAAAAEAAAAAAAAEAAAAAEEAABAA=</HashCode>
       <FileName>Rectangle.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Geometry.Square" Collapsed="true">
     <Position X="1.25" Y="4" Width="1.5" />
@@ -26,6 +27,21 @@
     <TypeIdentifier>
       <HashCode>AAAIAAAACAAAAgAAAAAAAAAAAAAAAAEAAAAAEEAAAAA=</HashCode>
       <FileName>Circle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Geometry.Triangle" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Triangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.EquilateralTriangle" Collapsed="true">
+    <Position X="4.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAAIAAAABAAAAAAAEAAAAAEEAAAAA=</HashCode>
+      <FileName>EquilateralTriangle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

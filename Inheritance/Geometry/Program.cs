@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define ABSTRACT_BASE_CLASS
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Geometry
 	{
 		static void Main(string[] args)
 		{
-			if (2 == 3)Console.WriteLine("Ура!!!");
+			if (2 == 3) Console.WriteLine("Ура!!!");
 
 			IntPtr hwnd = GetConsoleWindow();
 			Graphics graphics = Graphics.FromHwnd(hwnd);
@@ -24,6 +25,7 @@ namespace Geometry
 				);
 			PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
 			//e.Graphics.DrawRectangle(new Pen(Color.Red, 2), 400, 100, 100, 100);
+#if ABSTRACT_BASE_CLASS
 
 			//Shape shape = new Shape(); //Невозможно создать экземпляр абстрактного класса
 			Square square = new Square(2000, 300, 0, 152, Color.Red);
@@ -34,6 +36,23 @@ namespace Geometry
 
 			Circle circle = new Circle(75, 500, 50, 5, Color.Yellow);
 			circle.Info(e);
+
+			EquilateralTriangle e_triangle = new EquilateralTriangle(100, 500, 400, 3, Color.Green);
+			e_triangle.Info(e); 
+#endif
+
+			Shape[] shapes = new Shape[]
+				{
+					new Square(2000, 300, 0, 152, Color.Red),
+					new Rectangle(300, 200, 400, 50, 3, Color.AliceBlue),
+					new Circle(75, 500, 50, 5, Color.Yellow),
+					new EquilateralTriangle(100, 500, 400, 3, Color.Green)
+				};
+			for (int i = 0; i < shapes.Length; i++)
+			{
+				if(shapes[i] is Triangle)shapes[i].Draw(e);
+			}
+
 		}
 		[DllImport("kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();
